@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import "template/"
 
 Rectangle {
     id: root
@@ -104,35 +105,35 @@ Rectangle {
         }
     }
 
-    Item {
-        id: screenComands
+    // Item {
+    //     id: screenComands
 
-        height: settingsConnect.height
-        width:  settingsConnect.width
-        Rectangle {
-            color: "#ececec"
-            border.color: "#93000000"
-            anchors.fill: parent
-            border.width: 1
-            radius: 25
-        }
+    //     height: settingsConnect.height
+    //     width:  settingsConnect.width
+    //     Rectangle {
+    //         color: "#ececec"
+    //         border.color: "#93000000"
+    //         anchors.fill: parent
+    //         border.width: 1
+    //         radius: 25
+    //     }
 
-        anchors { top: parent.top; right: parent.right }
-        anchors.margins: 10
-        MyButton {
-            id: addWidgetSender
-            width: 140
-            textButton: "Add \"Sender Widget\""
-            function click() {
-                areaSenderWidgets.addWidget()
-            }
-        }
+    //     anchors { top: parent.top; right: parent.right }
+    //     anchors.margins: 10
+    //     MyButton {
+    //         id: addWidgetSender
+    //         width: 140
+    //         textButton: "Add \"Sender Widget\""
+    //         function click() {
+    //             areaSenderWidgets.addWidget()
+    //         }
+    //     }
 
-        anchors {
-            top: parent.top
-            left: settingsConnect.right
-        }
-    }
+    //     anchors {
+    //         top: parent.top
+    //         left: settingsConnect.right
+    //     }
+    // }
 
 // --------------------------     END   ----------------------------------
 
@@ -152,7 +153,18 @@ Rectangle {
         }
     }
 
+    Button32 {
+        anchors.top: settingsConnect.bottom
+        anchors.right: groupBoxSenderWidgets.right
+        onClicked: areaSenderWidgets.addWidget()
+    }
+
+// --------------------------     END   ----------------------------------
+
+// ----------------------    Monitoring   --------------------------------
+
     GroupBox {
+        id: screenMonitoring
         title: "Monitoring"
         anchors.top: settingsConnect.bottom
         anchors.left: groupBoxSenderWidgets.right
@@ -168,5 +180,16 @@ Rectangle {
         root.eventClickConnect.connect(coreTester.toConnect)
         root.eventClickDisconnect.connect(coreTester.toDisconnect)
     }
-
+    ButtonSwitch {
+        id: switchRX
+        anchors.top: settingsConnect.bottom
+        anchors.right: switchTX.left
+        _text: "RX"
+    }
+    ButtonSwitch {
+        id: switchTX
+        anchors.top: settingsConnect.bottom
+        anchors.right: screenMonitoring.right
+        _text: "TX"
+    }
 }

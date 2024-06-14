@@ -3,6 +3,7 @@
 
 import QtQuick 6.2
 import CANTester
+
 Window {
     id: root
     width: 1920

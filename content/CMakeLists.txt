@@ -9,14 +9,19 @@ qt6_add_qml_module(content
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
-        Logger.qml
         Screen01.ui.qml
-        CanWindow.qml
-        MyTextInput.qml
-        AreaMonitoring.qml
-        MyButton.qml
         AreaSenderWidgets.qml
         SenderWidget.qml
         App.qml
+        Logger.qml
+        CanWindow.qml
+        AreaMonitoring.qml
+        template/Button32.qml
+        template/MyTextInput.qml
+        template/ButtonSwitch.qml
+        template/MyButton.qml
+    RESOURCES
+        images/plus_32.png
+        images/plus_64.png
 
 )

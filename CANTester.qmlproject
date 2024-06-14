@@ -67,6 +67,10 @@ Project {
         filter: "*.mesh"
         directory: "asset_imports"
     }
+    Files {
+        filter: "*.png"
+        directory: "asset_imports"
+    }
 
     Files {
         filter: "*.qad"

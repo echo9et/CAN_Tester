@@ -47,7 +47,7 @@ bool Core::toConnect(QString name_interface, QString bitrate)
         status = false;
     }
 
-    if ( !status || init_rx(name_interface) != 0 || init_tx(name_interface) != 0)
+    if ( !status || init_rx(name_interface) != 0 || init_tx(name_interface) != 0 )
     {
         status = false;
     }
@@ -91,7 +91,7 @@ void Core::send(QString id, QString payload)
         return;
     }
 
-    emit sendRecordLog("send to CAN msg: " + payload);
+    emit sendDataTX(frame.can_id, frame.can_dlc, data);
 
     return;
 }
@@ -146,11 +146,6 @@ void Core::slotGetData(quint32 id, int dlc, std::vector<int> payload)
         else isFirst = !isFirst;
         _payload += QString::number(value);
     }
-    qDebug() << _number;
-    qDebug() << _id;
-    qDebug() << _time;
-    qDebug() << _dlc;
-    qDebug() << _payload;
 }
 
 bool Core::runConsole(const QString& path, const QStringList arg)

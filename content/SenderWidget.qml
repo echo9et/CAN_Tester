@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-
+import "template/"
 Grid {
     id: root
     height: 85
@@ -9,8 +9,7 @@ Grid {
     columns: 3
     rows: 3
     spacing: 5
-    signal eventClickSend(string id, string payload)
-
+    signal eventClickSend(string id, string payload, bool isRx)
     function getId() {
         return inputID.getText();
     }
@@ -29,12 +28,15 @@ Grid {
     MyTextInput {
         id: inputID
         _text: "AAA"
+        _validator: RegularExpressionValidator {
+            regularExpression: /[0-9A-F]{8}/
+        }
     }
     MyButton {
         id: cmdSend
         textButton: "Send"
         function click() {
-            eventClickSend(inputID._text, inputPayload._text)
+            eventClickSend(inputID._text, inputPayload._text, true)
         }
     }
 
@@ -46,11 +48,10 @@ Grid {
         text: "Payload:"
     }
     MyTextInput {
-        _text: "AA BB CC DD"
         id: inputPayload
-
-        on_TextChanged: {
-            _payload = text
+        _text: "AABBCC"
+        _validator: RegularExpressionValidator {
+            regularExpression: /[0-9A-F]{16}/
         }
     }
     Text {
@@ -69,12 +70,35 @@ Grid {
     }
     MyTextInput {
         id: inputTimer
+        _validator: IntValidator{
+            bottom: 10;
+            top: 1000;
+        }
     }
 
     Switch {
+        Timer {
+            id: timer
+            interval: 1000; running: false; repeat: true
+            onTriggered: cmdSend.click()
+        }
+
         width: 70
         height: 20
-        id: switch1
+        id: switchRun
+        onClicked: {
+            if ( checked ) {
+                if ( inputTimer._text.length == 0 ) {
+                    switchRun.checked = false
+                    return;
+                }
+                timer.interval = inputTimer._text
+                timer.running = true
+            }
+            else {
+                timer.running = false
+            }
+        }
     }
 
 }

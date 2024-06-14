@@ -1,7 +1,8 @@
 *.txt.user
 # Prerequisites
 *.d
-
+/build
+*.txt.user
 # Compiled Object files
 *.slo
 *.lo

@@ -19,9 +19,9 @@ class Core : public BaseCore
     QThread ListenerCANThread;
 
 public:
+    Core(QObject *parent = nullptr);
     bool toConnect(const QString name_interfaces,const QString bitrate) override;
     void toDisconnect(QString) override;
-    Core(QObject *parent = nullptr);
 
     void send(QString id, QString value) override;
     QStringList getInterfaces() override;
@@ -29,9 +29,8 @@ public:
 public slots:
     void slotGetData(quint32 id, int dlc, std::vector<int> payload);
 signals:
-    void sendRecordLog(QString);
-    void sendDataMonitor(quint32 id, int dlc, std::vector<int> payload);
     void startRxCan();
+
 private:
     bool runConsole(const QString& path, const QStringList arg);
     bool upInterface(const QString& name_interface);

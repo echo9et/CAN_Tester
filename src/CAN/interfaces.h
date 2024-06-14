@@ -23,6 +23,8 @@ signals:
 
     /// @brief отправка данных в таблицу фреймов
     void sendDataMonitor(int id, int dlc, std::vector<int> payload);
+    void sendDataTX(int id, int dlc, QStringList payload);
+    void sendDataRX(int id, int dlc, std::vector<int> payload);
 
 protected:
     BaseCore(QObject *parent = nullptr) : QObject(parent) {}

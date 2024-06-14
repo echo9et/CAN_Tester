@@ -7,6 +7,8 @@ Rectangle{
     height: 24
     property int _margin: 5
     property string _text
+    property variant _validator
+
 
 
     color: "lightgrey"
@@ -19,6 +21,8 @@ Rectangle{
         anchors.fill: parent
         anchors.margins: _margin
         text: root._text
+        validator: _validator ? _validator : IntValidator
+
         onTextChanged: {
             root._text = text
         }

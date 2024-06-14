@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-
+import "template/"
 Item {
     id: root
     anchors.top: parent.top
@@ -11,6 +11,7 @@ Item {
     function addWidget() {
         listSenderWidgets.append({})
     }
+
     DelegateModel {
         id: visualModel
         model: ListModel {

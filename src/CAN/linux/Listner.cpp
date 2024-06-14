@@ -26,10 +26,6 @@ void Listner::start()
 {
     struct can_frame frame;
     int nbytes;
-//    struct timeval tv;
-//    tv.tv_sec = 1000;
-//    tv.tv_usec = 0;
-//    setsockopt(_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
     while( true )
     {
         nbytes = read(_socket, &frame, sizeof(struct can_frame));
@@ -46,8 +42,9 @@ void Listner::start()
             payload.push_back(frame.data[i]);
         }
         if ( frame.can_id == _can_id ) { qDebug() << " break "; break; }
-        if ( frame.can_id > 4096 )
+        if ( frame.can_id > 8096 )
         {
+            qDebug() << "extern frame" << frame.can_id << " -> " << ( frame.can_id & CAN_EFF_MASK );
             frame.can_id &= CAN_EFF_MASK;
         }
         emit sendDataMonitor(frame.can_id, frame.can_dlc, payload);

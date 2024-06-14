@@ -10,6 +10,7 @@ class DataModel : public QAbstractListModel
 public:
     enum DataRoles {
         CountRole = Qt::UserRole + 1,
+        IsRX,
         IdRole,
         TimeRole,
         DlcRole,

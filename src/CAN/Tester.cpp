@@ -15,6 +15,8 @@ Tester::Tester(QObject *parent) :
 
     connect(_core, &Core::sendDataMonitor,
             this,  &Tester::getData);
+    connect(_core, &Core::sendDataTX,
+            this, &Tester::getDataTX);
     _core->init();
     _interfaces = _core->getInterfaces();
 }
@@ -66,6 +68,22 @@ void Tester::getData(quint32 id, int dlc, std::vector<int> payload)
     _dataModel.addData({IntToHex(id),
                         QDateTime::currentDateTime().toString("hh:mm:ss:zzz"),
                         QString::number(dlc),
-                        out_payload});
-    qDebug() << "get data";
+                        out_payload,
+                        true});
+}
+
+void Tester::getDataTX(quint32 id, int dlc, QStringList payload)
+{
+    QString out_payload;
+    for ( size_t i = 0; i < payload.size(); ++i )
+    {
+        if ( i != 0 ) out_payload += " ";
+        out_payload += payload.at(i);
+    }
+
+    _dataModel.addData({IntToHex(id),
+                        QDateTime::currentDateTime().toString("hh:mm:ss:zzz"),
+                        QString::number(dlc),
+                        out_payload
+                        });
 }

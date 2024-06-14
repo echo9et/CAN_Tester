@@ -21,11 +21,16 @@ int DataModel::rowCount(const QModelIndex &parent) const
 
 QVariant DataModel::data(const QModelIndex &index, int role) const
 {
-    if (index.row() < 0 || index.row() >= _data.count()) return QVariant();
+    if (index.row() < 0 || index.row() >= _data.count())
+    {
+        return QVariant();
+    }
 
     const Data &Data = _data[index.row()];
     if (role == CountRole)
         return Data.count();
+    else if (role == IsRX)
+        return Data.isRX();
     else if (role == IdRole)
         return Data.id();
     else if (role == TimeRole)
@@ -46,6 +51,7 @@ QHash<int, QByteArray> DataModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[CountRole] = "count";
+    roles[IsRX] = "isRX";
     roles[IdRole] = "id";
     roles[TimeRole] = "time";
     roles[DlcRole] = "dlc";

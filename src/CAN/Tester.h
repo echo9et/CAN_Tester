@@ -19,9 +19,10 @@ public:
 
 public slots:
     void toConnect(QString, QString);
-    void toDisconnect(QString);    
+    void toDisconnect(QString);
     void toSend(QString, QString);
     void getData(quint32 id, int dlc, std::vector<int> payload);
+    void getDataTX(quint32 id, int dlc, QStringList payload);
 
 private:
     QStringList _interfaces;

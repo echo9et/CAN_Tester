@@ -15,8 +15,8 @@ qt6_add_qml_module(CANTester
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
         DirectoryFontLoader.qml
-        Constants.qml
         EventListSimulator.qml
         EventListModel.qml
+        Constants.qml
 
 )
