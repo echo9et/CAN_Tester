@@ -14,7 +14,7 @@
 int main(int argc, char *argv[])
 {
     set_qt_environment();
-
+    // какие то изменения
     QGuiApplication app(argc, argv);
 
     CAN::Tester CoreTester;
